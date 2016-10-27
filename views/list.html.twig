@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% if countries is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Id code</td>
+                    <td>Naam</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, country in countries %}
+                    <tr>
+                        <td>Id code</td>
+                        <td>Naam</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="starter-template">
+            <h1>Geen landen gevonden</h1>
+            <p class="lead">Begin nu direct met landen toe te voegen</p>
+            <a class="btn btn-primary">Toevoegen</a>
+        </div>
+    {% endif %}
+{% endblock %}
