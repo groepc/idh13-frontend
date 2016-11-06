@@ -32,8 +32,8 @@ $app->get('/country/create', function (Silex\Application $app) {
 });
 
 $app->post('/country/create', function (Silex\Application $app) {
-    $test = new IDH13SDK('http://localhost:7101/reference/CountryService?wsdl');
-    @$test->create($_POST['code'],$_POST['name'],$_POST['tailcode']);
+    $test = new IDH13SDK('http://localhost:7101/reference/CountryService?wsdl', array('trace'=> 1));
+    $createCountry = $test->create($_POST['code'],$_POST['name'],$_POST['tailcode']);
     return $app->redirect('/');
 });
 

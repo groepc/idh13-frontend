@@ -29,17 +29,4 @@ class IDH13SDK {
     }
 
 }
-/*
-try {
-    $test = new IDH13SDK('http://localhost:7101/reference/CountryService?wsdl');
-
-
-    $test->create('GR','Germany','D');
-    $data = $test->find();
-    var_dump($data);
-} catch (\Exception $e) {
-    echo 'exceptions' . "\r\n";
-    echo $e->getMessage();
-}
-*/
 
