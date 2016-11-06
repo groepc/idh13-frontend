@@ -3,10 +3,6 @@
 // web/index.php
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../IDH13SDK.php';
-$filename = __DIR__.preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
-if (php_sapi_name() === 'cli-server' && is_file($filename)) {
-    return false;
-}
 
 $filename = __DIR__.preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
 if (php_sapi_name() === 'cli-server' && is_file($filename)) {
@@ -15,6 +11,7 @@ if (php_sapi_name() === 'cli-server' && is_file($filename)) {
 
 $app = new Silex\Application();
 $app['debug'] = true;
+$app['current_url'] = $_SERVER['REQUEST_URI'];
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/../views',
@@ -36,7 +33,7 @@ $app->get('/country/create', function (Silex\Application $app) {
 
 $app->post('/country/create', function (Silex\Application $app) {
     $test = new IDH13SDK('http://localhost:7101/reference/CountryService?wsdl');
-    $test->create($_POST['code'],$_POST['name'],$_POST['tailcode']);
+    @$test->create($_POST['code'],$_POST['name'],$_POST['tailcode']);
     return $app->redirect('/');
 });
 
