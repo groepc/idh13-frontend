@@ -10,33 +10,36 @@ class IDH13SDK {
     }
 
     public function find() {
-        return $this->soapClient->findCountries();
+        $resultGetTranslation = $this->soapClient->findCountries();
+        $soapXMLResult = $this->soapClient->__getLastResponse();
+        $soap = simplexml_load_string($soapXMLResult);
+        return $response = $soap->children('http://schemas.xmlsoap.org/soap/envelope/')->Body->children()->CmnCountriesCollection;
     }
 
     public function create($code, $name, $tailCode = '') {
         return $this->soapClient->createCountry(
-                        array('NewCountry' =>
-                            array(
-                                'code' => $code,
-                                'name' => $name,
-                                'tailcode' => $tailCode,
-                            )
-                        )
+            array('NewCountry' =>
+                array(
+                    'code' => $code,
+                    'name' => $name,
+                    'tailcode' => $tailCode,
+                )
+            )
         );
     }
 
 }
-
+/*
 try {
     $test = new IDH13SDK('http://localhost:7101/reference/CountryService?wsdl');
 
 
-    $test->create();
+    $test->create('GR','Germany','D');
     $data = $test->find();
     var_dump($data);
 } catch (\Exception $e) {
     echo 'exceptions' . "\r\n";
     echo $e->getMessage();
 }
-
+*/
 
