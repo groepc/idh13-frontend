@@ -4,18 +4,22 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td>Id code</td>
+                    <td>DB ID</td>
+                    <td>Landcode</td>
                     <td>Naam</td>
-                    <td></td>
+                    <td>tailcode</td>
                 </tr>
             </thead>
             <tbody>
-                {% for key, country in countries %}
-                    <tr>
-                        <td>Id code</td>
-                        <td>Naam</td>
-                        <td></td>
-                    </tr>
+                {% for country in countries %}
+                    {% for countryInfo in country %}
+                        <tr>
+                            <td>{{countryInfo.id}}</td>
+                            <td>{{countryInfo.code}}</td>
+                            <td>{{countryInfo.name}}</td>
+                            <td>{{countryInfo.tailcode}}</td>
+                        </tr>
+                    {% endfor %}
                 {% endfor %}
             </tbody>
         </table>
